@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Achados de Beleza ✨</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #fdf8f2;
+      --warm: #c9a97a;
+      --gold: #b8894a;
+      --dark: #1a1410;
+      --muted: #8a7a6a;
+      --card: #fff9f2;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 20px 60px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(201,169,122,0.18) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .avatar-ring {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, var(--warm), var(--gold), #e8c98a, var(--warm));
+      margin-bottom: 18px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+    }
+
+    .name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--dark);
+      text-align: center;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .tagline {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 300;
+      text-align: center;
+      margin-top: 6px;
+      letter-spacing: 0.04em;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--warm), transparent);
+      margin: 22px 0;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+      animation: fadeUp 0.6s 0.35s ease both;
+    }
+
+    .product-card {
+      width: 100%;
+      background: var(--card);
+      border: 1px solid rgba(201,169,122,0.25);
+      border-radius: 20px;
+      overflow: hidden;
+      animation: fadeUp 0.6s 0.4s ease both;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(184,137,74,0.15);
+    }
+
+    .product-img-wrap {
+      width: 100%;
+      height: 240px;
+      position: relative;
+      background: linear-gradient(135deg, #f5e6d0, #ede0cc, #f0d9bc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .mirror-visual {
+      width: 130px;
+      height: 175px;
+      border-radius: 65px;
+      background: linear-gradient(160deg, #2a2218, #1a1410);
+      box-shadow:
+        0 0 0 8px rgba(201,169,122,0.3),
+        0 0 30px rgba(201,169,122,0.5),
+        0 0 60px rgba(201,169,122,0.2),
+        inset 0 0 20px rgba(255,220,150,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .mirror-glow {
+      position: absolute;
+      inset: -12px;
+      border-radius: 75px;
+      background: radial-gradient(ellipse, rgba(201,169,122,0.4) 0%, transparent 70%);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    .mirror-icon {
+      font-size: 36px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(26,20,16,0.75);
+      backdrop-filter: blur(8px);
+      color: #e8c98a;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+
+    .product-info {
+      padding: 20px 22px 22px;
+    }
+
+    .product-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      color: var(--dark);
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+
+    .product-desc {
+      font-size: 12.5px;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .btn-comprar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: linear-gradient(135deg, var(--warm), var(--gold));
+      color: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      padding: 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .btn-comprar:hover { opacity: 0.88; }
+
+    .btn-comprar svg {
+      width: 14px; height: 14px;
+      fill: none; stroke: currentColor;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    .footer {
+      margin-top: 36px;
+      font-size: 11px;
+      color: rgba(138,122,106,0.5);
+      text-align: center;
+      animation: fadeUp 0.6s 0.55s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+
+    <div class="avatar-ring">
+      <div class="avatar-inner">✨</div>
+    </div>
+
+    <h1 class="name">Achados de Beleza</h1>
+    <p class="tagline">Os melhores produtos ao melhor preço</p>
+
+    <div class="divider"></div>
+    <p class="section-label">em destaque agora</p>
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <div class="mirror-visual">
+          <div class="mirror-glow"></div>
+          <span class="mirror-icon">🪞</span>
+        </div>
+        <span class="product-badge">✦ Mais Vendido</span>
+      </div>
+      <div class="product-info">
+        <p class="product-name">Espelho Oval com Iluminação LED</p>
+        <p class="product-desc">Luz quente que valoriza a pele. Perfeito para maquiagem, skincare e decoração. Transforma qualquer banheiro.</p>
+        <a class="btn-comprar" href="https://s.shopee.com.br/3VgewI0EvR" target="_blank" rel="noopener">
+          Ver na Shopee
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <p class="footer">Links de afiliado — compra sem custo extra pra você 🤍</p>
+
+  </div>
+</body>
+</html>
